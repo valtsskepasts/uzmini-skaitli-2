@@ -1,0 +1,54 @@
+//c sharp uzmini skaitli spēle
+//šo es pats netaisīju, atradu
+using System;
+
+class GuessTheNumber
+{
+    static void Main()
+    {
+        // Randomly generate a number between 1 and 100
+        Random random = new Random();
+        int numberToGuess = random.Next(1, 101);
+
+        int playerGuess = 0;
+        int numberOfTries = 0;
+        bool isGuessedCorrectly = false;
+
+        Console.WriteLine("Welcome to Guess the Number!");
+        Console.WriteLine("I have selected a number between 1 and 100. Can you guess it?");
+
+        // Main game loop
+        while (!isGuessedCorrectly)
+        {
+            // Prompt the player for a guess
+            Console.Write("Enter your guess: ");
+            string playerInput = Console.ReadLine();
+
+            // Validate if the input is a valid number
+            if (int.TryParse(playerInput, out playerGuess))
+            {
+                numberOfTries++;
+
+                // Check if the guess is correct
+                if (playerGuess == numberToGuess)
+                {
+                    isGuessedCorrectly = true;
+                    Console.WriteLine($"Congratulations! You guessed the number {numberToGuess} in {numberOfTries} tries.");
+                }
+                else if (playerGuess < numberToGuess)
+                {
+                    Console.WriteLine("Too low! Try again.");
+                }
+                else
+                {
+                    Console.WriteLine("Too high! Try again.");
+                }
+            }
+            else
+            {
+                // If the input is not a valid number
+                Console.WriteLine("Please enter a valid number.");
+            }
+        }
+    }
+}
